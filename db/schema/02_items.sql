@@ -8,6 +8,6 @@ CREATE TABLE items(
   description TEXT,
   photo VARCHAR(255),
   created DATE NOT NULL,
-  sold_to INTEGER REFERENCES users(id) ON DELETE CASCADE,DEFAULT NULL
+  sold_to INTEGER REFERENCES users(id) ON DELETE CASCADE DEFAULT NULL
 
 );
