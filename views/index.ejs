@@ -100,17 +100,28 @@
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form> -->
+
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+          <% if(!user) {%>
           <li class="nav-item">
             <a class="nav-link" href="/login">Sign in</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/register">Sign up</a>
           </li>
+          <% } else { %>
           <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
+            <form method="POST" action="/logout">
+              <span class="text-muted">
+                Logged in as: <%= user.email %>
+              </span>
+              <button type="submit" class="nav-item btn btn-primary">Logout</button>
+            </form>
           </li>
+          <% } %>
+
         </ul>
+
       </div>
     </div>
   </nav>
