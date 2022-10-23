@@ -78,10 +78,13 @@ app.get('/login', (req, res) => {
     user: getCurrentUser(req),
   };
   res.render('login', viewData);
+<<<<<<< HEAD
 });
 
 app.get('/messages', (req, res) => {
   res.render('messenger');
+=======
+>>>>>>> master
 });
 
 app.listen(PORT, () => {
