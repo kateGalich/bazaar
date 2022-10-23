@@ -52,6 +52,16 @@ let getCurrentUser = function(req) {
 app.get('/', (req, res) => {
   const viewData = {
     user: getCurrentUser(req),
+    items: [
+      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
+      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
+      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
+      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
+      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
+      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
+      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
+      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"}
+    ]
   };
   res.render('index', viewData);
 });
