@@ -56,6 +56,10 @@ app.get('/login', (req, res) => {
   res.render('login');
 });
 
+app.get('/messages', (req, res) => {
+  res.render('messenger');
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
