@@ -45,8 +45,8 @@ app.use('/users', usersRoutes);
 // Separate them into separate routes files (see above).
 
 let getCurrentUser = function(req) {
-  return { email: "test@email.com" }
-  //return null;
+  //return { email: "test@email.com" }
+  return null;
 };
 
 app.get('/', (req, res) => {
