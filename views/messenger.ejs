@@ -25,11 +25,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4">
-        <div class="row border-bottom padding-sm">
-          <p>My Messages</p>
+        <div class="messages-header text-muted">
+          <strong>My Messages</strong>
         </div>
-        <ul class="buyer-list" style="list-style:none;">
-          <li class="active">
+        <ul class="buyer-list">
+          <li>
             <div class="buyer-name">
               <strong>Test Buyer</strong>
             </div>
@@ -38,7 +38,7 @@
               <i class="chat-alert fa-solid fa-check"></i>
             </div>
           </li>
-          <li class="active">
+          <li>
             <div class="buyer-name">
               <strong>Test Buyer 2</strong>
             </div>
@@ -51,9 +51,37 @@
       </div>
       <div class="col-md-8">
         <div class="chat-message">
-          <ul class="chat">
-
+          <ul class="chat" style="list-style:none;">
+            <li class="chat-them">
+              <div class="chat-header">
+                <strong>Test Buyer</strong>
+              </div>
+              <div class="chat-body">
+                <p>Testing a chat from Test Buyer</p>
+              </div>
+            </li>
+            <li class="chat-me">
+              <div class="chat-header">
+                <strong>Me</strong>
+              </div>
+              <div class="chat-body">
+                <p>Testing a chat from myself to test buyer</p>
+                <p>With another right below it</p>
+              </div>
+            </li>
+            <li>
+              <div class="chat-header">
+                <strong>Test Buyer</strong>
+              </div>
+              <div class="chat-body">
+                <p>And a response back</p>
+              </div>
+            </li>
           </ul>
+          <div class="chat-box">
+            <input class="form-control border no-shadow no-rounded" placeholder="Type your message here">
+            <button class="btn btn-success no-rounded" type="button">Send</button>
+          </div>
         </div>
       </div>
     </div>

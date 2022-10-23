@@ -1,0 +1,33 @@
+.buyer-list {
+  list-style: none;
+  margin-left: -40px;
+}
+
+.buyer-list li {
+  padding: 5px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid grey;
+}
+
+.last-message {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.messages-header {
+  margin-bottom: 10px;
+  margin-left: -10px;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.chat-box {
+  padding-left: 10px;
+  padding-right: 10px;
+}
