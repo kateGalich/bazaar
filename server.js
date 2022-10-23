@@ -44,16 +44,40 @@ app.use('/users', usersRoutes);
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+let getCurrentUser = function(req) {
+  //return { email: "test@email.com" }
+  return null;
+};
+
 app.get('/', (req, res) => {
-  res.render('index');
+  const viewData = {
+    user: getCurrentUser(req),
+    items: [
+      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
+      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
+      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
+      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
+      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
+      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
+      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
+      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"}
+    ]
+  };
+  res.render('index', viewData);
 });
 
 app.get('/register', (req, res) => {
-  res.render('register');
+  const viewData = {
+    user: getCurrentUser(req),
+  };
+  res.render('register', viewData);
 });
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  const viewData = {
+    user: getCurrentUser(req),
+  };
+  res.render('login', viewData);
 });
 
 app.get('/messages', (req, res) => {
