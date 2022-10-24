@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Checkout example · Bootstrap v5.2</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+  <script defer src="/vendor/fontawesome/js/brands.js"></script>
+  <script defer src="/vendor/fontawesome/js/solid.js"></script>
+  <script defer src="/vendor/fontawesome/js/fontawesome.js"></script>
+
+  <!-- Custom styles for this template -->
+  <link href="styles/postlisting.css" rel="stylesheet">
+  <link href="styles/main.css" rel="stylesheet">
+  <link href="styles/layout.css" rel="stylesheet">
+
+
+
+  <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="form-validation.css" rel="stylesheet">
+</head>
+
+<body>
+  <%- include('partials/_nav') %>
+
+    <div class="container">
+      <main>
+        <div class="py-5 text-center">
+          <h2>Post New Listing</h2>
+        </div>
+        <div class="col-12">
+          <h4 class="mb-3">Listing Information</h4>
+          <form class="needs-validation" novalidate>
+            <div class="row g-3">
+              <div class="col-12">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" placeholder="title" value="" required>
+                <div class="invalid-feedback">
+                  Title is required.
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="price" class="form-label">Price</label>
+                <input type="text" class="form-control" id="price" placeholder="$5.00" value="" required>
+                <div class="invalid-feedback">
+                  Price is required.
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="description" class="form-label">Description</label>
+                <div class="input-group has-validation">
+                  <input type="text" class="form-control" id="description" placeholder="description" required>
+                  <div class="invalid-feedback">
+                    A description is required.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="photo" class="form-label">Photo</label>
+                <input type="file" class="form-control" id="photo" placeholder="">
+                <div class="invalid-feedback">
+                  Please enter a photo for the listing.
+                </div>
+              </div>
+
+            </div>
+            <hr class="my-4">
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Submit Listing</button>
+          </form>
+        </div>
+      </main>
+</body>
+
+</html>

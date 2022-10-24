@@ -87,6 +87,13 @@ app.get('/messages', (req, res) => {
   res.render('messenger', viewData);
 });
 
+app.get('/newad', (req, res) => {
+  const viewData = {
+    user: getCurrentUser(req),
+  };
+  res.render('postlisting', viewData);
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
