@@ -7,7 +7,7 @@
 
 const express = require('express');
 const { application } = require('express');
-const { registerUser } = require('./database');
+const { registerUser, loginUser } = require('./database');
 const bcrypt = require ('bcryptjs');
 const router  = express.Router();
 
@@ -20,9 +20,24 @@ router.post('/register', (req, res) => {
     address: req.body.address
   };
   const user = registerUser(newUser);
-
-  req.session.user = user.id;
   res.redirect("/");
+});
+
+router.post('/login', (req, res) => {
+  const logUser = {
+    email: req.body.email,
+    password: req.body.password
+  };
+  loginUser(logUser)
+  .then((user) => {
+    console.log(user);
+    if (!user || !bcrypt.compareSync(logUser.password, user.password)) {
+      alert('Email or Password is incorrect');
+      return;
+    }
+    res.redirect("/");
+  })
+  .catch(err => console.log(err));
 });
 
 module.exports = router;
