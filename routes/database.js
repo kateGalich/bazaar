@@ -12,6 +12,16 @@ const registerUser = function (user) {
   return pool
     .query(`
     INSERT INTO users (name, password, email, phone, address)
-    VALUES ($1, $2, $3, $4, $5);
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *;
     `, userInfo)
+    .then((result) => {
+      console.log(result.rows[0]);
+      return Promise.resolve(result.rows[0])
+    })
+    .catch ((err) => {
+      console.log(err);
+    })
 }
+
+exports.registerUser = registerUser;
