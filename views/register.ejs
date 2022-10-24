@@ -21,27 +21,27 @@
   <%- include('partials/_nav') %>
 
   <main class="form-signin w-100 m-auto">
-    <form>
+    <form method="POST">
       <i class="fa-solid fa-store fa-3x"></i>
       <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
       <div class="form-floating">
-        <input type="name" class="form-control" id="floatingInput" placeholder="firstname lastname">
+        <input type="text" class="form-control" id="name" placeholder="firstname lastname">
         <label for="floatingInput">Name *</label>
       </div>
       <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <input type="email" class="form-control" id="email" placeholder="name@example.com">
         <label for="floatingInput">Email address *</label>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <input type="password" class="form-control" id="password" placeholder="Password">
         <label for="floatingPassword">Password *</label>
       </div>
       <div class="form-floating">
-        <input type="phone" class="form-control" id="floatingInput" placeholder="222-333-4444">
+        <input type="tel" class="form-control" id="phone" placeholder="222-333-4444">
         <label for="floatingInput">Phone</label>
       </div>
       <div class="form-floating">
-        <input type="address" class="form-control" id="floatingInput" placeholder="14 example street, ON, CA">
+        <input type="text" class="form-control" id="address" placeholder="14 example street, ON, CA">
         <label for="floatingInput">Address</label>
       </div>
       <p>Already a member? <a href="/login">Sign in</a></p>
