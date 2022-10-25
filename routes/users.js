@@ -13,7 +13,7 @@ let getCurrentUser = function (req) {
 
 const express = require('express');
 const { application } = require('express');
-const { registerUser, loginUser } = require('./database');
+const { registerUser, loginUser, uploadListing } = require('./database');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
 
@@ -35,6 +35,19 @@ router.post('/login/:id', (req, res) => {
   loginUser(req.session.user_id);
   res.redirect('/');
 });
+
+router.post('/newlisting', (req, res) => {
+  const itemData = {
+    seller_id: req.session.user_id,
+    title: req.body.title,
+    price: req.body.price,
+    description: req.body.description,
+
+  }
+
+  uploadListing(itemData);
+  res.redirect('/');
+})
 
 // router.post('/login', (req, res) => {
 //   const logUser = {
