@@ -7,7 +7,7 @@ const express = require('express');
 const morgan = require('morgan');
 
 // temporarily importing here
-const { getItems } = require('./db/queries/items');
+const { getItems, getItem } = require('./db/queries/items');
 
 const cookieSession = require('cookie-session');
 const bcrypt = require('bcryptjs');
@@ -73,6 +73,18 @@ app.get('/', (req, res) => {
     res.render('index', viewData);
   });
 });
+
+
+app.get('/item/:id', (req, res) => {
+  getItem(req.params.id).then(item => {
+    const viewData = {
+      user: getCurrentUser(req),
+      item: item
+    };
+    res.render('item', viewData);
+  });
+});
+
 
 app.get('/register', (req, res) => {
   const viewData = {
