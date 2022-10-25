@@ -5,6 +5,10 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
+
+// temporarily importing here
+const { getItems } = require('./db/queries/items');
+
 const cookieSession = require('cookie-session');
 const bcrypt = require ('bcryptjs');
 const PORT = process.env.PORT || 8080;
@@ -56,20 +60,13 @@ let getCurrentUser = function(req) {
 };
 
 app.get('/', (req, res) => {
-  const viewData = {
-    user: getCurrentUser(req),
-    items: [
-      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
-      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
-      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
-      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
-      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
-      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
-      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"},
-      {title: "table", price: 10, photo:"https://images.metmuseum.org/CRDImages/ad/original/85G_ACF263R3.jpg"}
-    ]
-  };
-  res.render('index', viewData);
+  getItems().then(items => {
+    const viewData = {
+      user: getCurrentUser(req),
+      items: items
+    };
+    res.render('index', viewData);
+  });
 });
 
 app.get('/register', (req, res) => {
