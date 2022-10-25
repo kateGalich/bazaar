@@ -33,32 +33,32 @@
 
     <main>
 
-      <div class="album pb-5">
+      <div class="album pt-5">
         <div class="container">
-
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-              <div class="col">
-                <div class="card shadow-sm">
-                  <a href="/item/<%=item.id%>">
-                    <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="<%=item.photo%>"
-                      aria-label="Placeholder: Thumbnail" focusable="false">
-                    </a>
-                    <div class="card-body">
-                      <p class="card-text fs-5 fw-normal">
-                        <%=item.title %>
-                      </p>
-                      <p class="card-text">
-                        <%=item.description %>
-                      </p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <span class="fs-5 ">$<%=item.price%></span>
-                      </div>
-                    </div>
-
+          <div class="row align-items-md-stretch">
+            <div class="col-md-6 ">
+              <div class="p-5 bg-light border rounded-3">
+                <a href="/item/<%=item.id%>">
+                  <img class="bd-placeholder-img card-img-top h-100" width="100%" height="225" src="<%=item.photo%>"
+                    aria-label="Placeholder: Thumbnail" focusable="false">
+                </a>
+                <div class="card-body h-100">
+                  <p class="card-text fs-5 fw-normal">
+                    <%=item.title %>
+                  </p>
+                  <p class="card-text">
+                    <%=item.description %>
+                  </p>
+                  <p class="fs-5 ">$<%=item.price%>
+                  </p>
                 </div>
               </div>
-
+            </div>
+            <div class="col-md-6">
+              <div class="h-100 p-5 bg-light border rounded-3">
+                messages
+              </div>
+            </div>
           </div>
         </div>
       </div>
