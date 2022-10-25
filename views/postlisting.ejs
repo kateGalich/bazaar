@@ -31,14 +31,14 @@
         <div class="py-5 text-center">
           <h2>Post New Listing</h2>
         </div>
-        <form method="POST" action="users/postlisting">
+        <form method="POST" action="/users/newlisting">
           <div class="col-12">
             <h4 class="mb-3">Listing Information</h4>
             <form class="needs-validation" novalidate>
               <div class="row g-3">
                 <div class="col-12">
                   <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" placeholder="title" value="" required>
+                  <input type="text" class="form-control" id="title" name="title" placeholder="title" value="" required>
                   <div class="invalid-feedback">
                     Title is required.
                   </div>
@@ -46,7 +46,7 @@
 
                 <div class="col-12">
                   <label for="price" class="form-label">Price</label>
-                  <input type="text" class="form-control" id="price" placeholder="$5.00" value="" required>
+                  <input type="text" class="form-control" id="price" name="price" placeholder="$5.00" value="" required>
                   <div class="invalid-feedback">
                     Price is required.
                   </div>
@@ -55,7 +55,7 @@
                 <div class="col-12">
                   <label for="description" class="form-label">Description</label>
                   <div class="input-group has-validation">
-                    <input type="text" class="form-control" id="description" placeholder="description" required>
+                    <input type="text" class="form-control" id="description" name="description" placeholder="description" required>
                     <div class="invalid-feedback">
                       A description is required.
                     </div>
@@ -64,9 +64,9 @@
 
                 <div class="col-12">
                   <label for="photo" class="form-label">Photo</label>
-                  <input type="file" class="form-control" id="photo" placeholder="">
+                  <input type="text" class="form-control" id="photo" name="photo" placeholder="">
                   <div class="invalid-feedback">
-                    Please enter a photo for the listing.
+                    Please enter a photo link for the listing.
                   </div>
                 </div>
 
