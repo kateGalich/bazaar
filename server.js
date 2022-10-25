@@ -60,10 +60,11 @@ let getCurrentUser = function(req) {
 };
 
 app.get('/', (req, res) => {
-  getItems().then(items => {
+  getItems(req.query).then(items => {
     const viewData = {
       user: getCurrentUser(req),
-      items: items
+      items: items,
+      query: req.query
     };
     res.render('index', viewData);
   });
