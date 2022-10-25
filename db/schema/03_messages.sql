@@ -7,5 +7,4 @@ seller_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
 item_id INTEGER REFERENCES items(id) ON DELETE CASCADE,
 text_message TEXT NOT NULL,
 created DATE NOT NULL
-
 );

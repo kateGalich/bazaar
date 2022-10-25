@@ -20,17 +20,17 @@
 <body class="text-center">
   <%- include('partials/_nav') %>
   <main class="form-signin w-100 m-auto">
-    <form>
+    <form method="POST" action="/users/login">
       <i class="fa-solid fa-store fa-3x"></i>
       <h1 class="h3 mb-3 fw-normal">Log in</h1>
 
       <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">Email address</label>
+        <input type="email" class="form-control" name="email" placeholder="name@example.com">
+        <label for="email">Email address</label>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Password</label>
+        <input type="password" class="form-control" name="password" placeholder="Password">
+        <label for="password">Password</label>
       </div>
       <p>Not a member? <a href="/register">Register</a></p>
       <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
