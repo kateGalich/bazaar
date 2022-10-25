@@ -1,8 +1,4 @@
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
 
   background: rgb(163, 208, 219);
@@ -35,7 +31,7 @@ body {
   }
 
   header {
-    margin-top: 160px;
+    margin-top: 120px;
   }
 
 }
