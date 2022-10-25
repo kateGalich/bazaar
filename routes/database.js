@@ -26,12 +26,12 @@ const registerUser = function(user) {
 exports.registerUser = registerUser;
 
 const loginUser = function(user) {
-  const userInfo = [`${user.email}`];
+  const userInfo = [`${user}`];
 
   return pool
     .query(`
-    SELECT email, password FROM users
-    WHERE email = $1
+    SELECT * FROM users
+    WHERE id = $1
     `, userInfo)
     .then((result) => {
       console.log(result.rows[0]);

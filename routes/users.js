@@ -5,11 +5,17 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+const { getItems } = require('../db/queries/items');
+let getCurrentUser = function (req) {
+  //return { email: "test@email.com" }
+  return null;
+};
+
 const express = require('express');
 const { application } = require('express');
 const { registerUser, loginUser } = require('./database');
-const bcrypt = require ('bcryptjs');
-const router  = express.Router();
+const bcrypt = require('bcryptjs');
+const router = express.Router();
 
 router.post('/register', (req, res) => {
   const newUser = {
@@ -19,8 +25,15 @@ router.post('/register', (req, res) => {
     phone: req.body.phone,
     address: req.body.address
   };
-  const user = registerUser(newUser);
+  registerUser(newUser);
   res.redirect("/");
+});
+
+router.post('/login/:id', (req, res) => {
+  req.session.user_id = req.params.id;
+  console.log(req.session.user_id);
+  loginUser(req.session.user_id);
+  res.redirect('/');
 });
 
 // router.post('/login', (req, res) => {

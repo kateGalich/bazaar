@@ -31,49 +31,51 @@
         <div class="py-5 text-center">
           <h2>Post New Listing</h2>
         </div>
-        <div class="col-12">
-          <h4 class="mb-3">Listing Information</h4>
-          <form class="needs-validation" novalidate>
-            <div class="row g-3">
-              <div class="col-12">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title" placeholder="title" value="" required>
-                <div class="invalid-feedback">
-                  Title is required.
-                </div>
-              </div>
-
-              <div class="col-12">
-                <label for="price" class="form-label">Price</label>
-                <input type="text" class="form-control" id="price" placeholder="$5.00" value="" required>
-                <div class="invalid-feedback">
-                  Price is required.
-                </div>
-              </div>
-
-              <div class="col-12">
-                <label for="description" class="form-label">Description</label>
-                <div class="input-group has-validation">
-                  <input type="text" class="form-control" id="description" placeholder="description" required>
+        <form method="POST" action="users/postlisting">
+          <div class="col-12">
+            <h4 class="mb-3">Listing Information</h4>
+            <form class="needs-validation" novalidate>
+              <div class="row g-3">
+                <div class="col-12">
+                  <label for="title" class="form-label">Title</label>
+                  <input type="text" class="form-control" id="title" placeholder="title" value="" required>
                   <div class="invalid-feedback">
-                    A description is required.
+                    Title is required.
                   </div>
                 </div>
-              </div>
 
-              <div class="col-12">
-                <label for="photo" class="form-label">Photo</label>
-                <input type="file" class="form-control" id="photo" placeholder="">
-                <div class="invalid-feedback">
-                  Please enter a photo for the listing.
+                <div class="col-12">
+                  <label for="price" class="form-label">Price</label>
+                  <input type="text" class="form-control" id="price" placeholder="$5.00" value="" required>
+                  <div class="invalid-feedback">
+                    Price is required.
+                  </div>
                 </div>
-              </div>
 
-            </div>
-            <hr class="my-4">
-            <button class="w-100 btn btn-primary btn-lg" type="submit">Submit Listing</button>
-          </form>
-        </div>
+                <div class="col-12">
+                  <label for="description" class="form-label">Description</label>
+                  <div class="input-group has-validation">
+                    <input type="text" class="form-control" id="description" placeholder="description" required>
+                    <div class="invalid-feedback">
+                      A description is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <label for="photo" class="form-label">Photo</label>
+                  <input type="file" class="form-control" id="photo" placeholder="">
+                  <div class="invalid-feedback">
+                    Please enter a photo for the listing.
+                  </div>
+                </div>
+
+              </div>
+              <hr class="my-4">
+              <button class="w-100 btn btn-primary btn-lg" type="submit">Submit Listing</button>
+            </form>
+          </div>
+        </form>
       </main>
     </div>
 </body>
