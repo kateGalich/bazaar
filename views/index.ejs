@@ -30,18 +30,20 @@
     <header>
 
       <section class="jumbotron text-center">
-        <div class="container">
-          <form action="/" method="get" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 p-4" role="search">
+        <div class="container d-flex justify-content-center">
+          <form action="/" method="get" id="search" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 p-4 " role="search">
             <div>
-              <input type="search" name="title" class="form-control"
-                placeholder="Search..." aria-label="Search" value="<%=query.title %>">
+              <input type="search" name="title" class="form-control" placeholder="Search..." aria-label="Search"
+                value="<%=query.title %>">
             </div>
             <div class="row g-3 ">
               <div class="col-sm-6">
-                <input type="number" class="form-control mt-2" name="minimum_price" placeholder="Minimum Price" value="<%=query.minimum_price %>">
+                <input type="number" class="form-control mt-2" name="minimum_price" placeholder="Minimum Price"
+                  value="<%=query.minimum_price %>">
               </div>
               <div class="col-sm-6">
-                <input type="number" class="form-control mt-2 " name="maximum_price" placeholder="Maximum Price" value="<%=query.maximum_price %>">
+                <input type="number" class="form-control mt-2 " name="maximum_price" placeholder="Maximum Price"
+                  value="<%=query.maximum_price %>">
               </div>
             </div>
             <div>
@@ -57,7 +59,7 @@
 
 
 
-      <div class="album py-5 bg-light">
+      <div class="album pb-5">
         <div class="container">
 
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -65,21 +67,22 @@
             <% for (let item of items) { %>
               <div class="col">
                 <div class="card shadow-sm">
-                  <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="<%=item.photo%>"
-                    aria-label="Placeholder: Thumbnail" focusable="false">
-
-                  <div class="card-body">
-                    <p class="card-text">
-                      <%=item.title %>
-                    </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <a href="/item/<%=item.id%>">
+                    <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="<%=item.photo%>"
+                      aria-label="Placeholder: Thumbnail" focusable="false">
+                    </a>
+                    <div class="card-body">
+                      <p class="card-text fs-5 fw-normal">
+                        <%=item.title %>
+                      </p>
+                      <p class="card-text">
+                        <%=item.description %>
+                      </p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="fs-5 ">$<%=item.price%></span>
                       </div>
-                      <span class="text-muted">$<%=item.price%></span>
                     </div>
-                  </div>
+
                 </div>
               </div>
               <% } %>
