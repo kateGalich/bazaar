@@ -22,6 +22,16 @@ const getItems = (query) => {
     .then((data) => data.rows);
 };
 
+const getItem = (itemId) => {
+  let sql = 'SELECT * FROM items WHERE id=$1;';
+  let values = [itemId];
+  return db.query(sql, values)
+    .then(data => {
+      return data.rows[0];
+    });
+};
+
 module.exports = {
-  getItems: getItems
+  getItems: getItems,
+  getItem: getItem
 };

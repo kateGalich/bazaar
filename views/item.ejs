@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Home Page</title>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <!-- <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png"> -->
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/app.js"></script>
+
+  <script defer src="/vendor/fontawesome/js/brands.js"></script>
+  <script defer src="/vendor/fontawesome/js/solid.js"></script>
+  <script defer src="/vendor/fontawesome/js/fontawesome.js"></script>
+
+</head>
+
+<body>
+  <%- include('partials/_nav') %>
+    <header>
+
+    </header>
+
+    <main>
+
+      <div class="album pb-5">
+        <div class="container">
+
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+              <div class="col">
+                <div class="card shadow-sm">
+                  <a href="/item/<%=item.id%>">
+                    <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="<%=item.photo%>"
+                      aria-label="Placeholder: Thumbnail" focusable="false">
+                    </a>
+                    <div class="card-body">
+                      <p class="card-text fs-5 fw-normal">
+                        <%=item.title %>
+                      </p>
+                      <p class="card-text">
+                        <%=item.description %>
+                      </p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <span class="fs-5 ">$<%=item.price%></span>
+                      </div>
+                    </div>
+
+                </div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="text-muted py-5">
+      <div class="container">
+        <p class="float-end mb-1">
+          <a href="#">Back to top</a>
+        </p>
+        <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+        <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a
+            href="/docs/5.2/getting-started/introduction/">getting started guide</a>.</p>
+      </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"></script>
+
+    <script src="scripts/header.js"></script>
+
+
+</body>
+
+</html>
