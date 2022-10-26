@@ -53,7 +53,6 @@ const uploadListing = function(listing) {
     VALUES ($1, $2, $3, $4, $5, $6)
     `, listingInfo)
     .then((result) => {
-      console.log('success!');
       console.log(result.rows[0]);
       return Promise.resolve(result.rows[0]);
     })
@@ -63,3 +62,22 @@ const uploadListing = function(listing) {
     })
 };
 exports.uploadListing = uploadListing;
+
+const fetchMessages = function(messages) {
+  const itemInfo = [`${messages}`];
+
+  return pool
+    .query(`
+      SELECT *
+      FROM messages
+      LEFT JOIN items ON item_id = items.id
+      WHERE items.id = $1
+    `, itemInfo)
+    .then((result) => {
+      return Promise.resolve(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+};
+exports.fetchMessages = fetchMessages;

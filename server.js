@@ -43,7 +43,7 @@ app.use(cookieSession({
 const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users.js');
-const { loginUser } = require('./routes/database');
+const { loginUser, fetchMessages } = require('./routes/database');
 const { user } = require('pg/lib/defaults');
 
 // Mount all resource routes
@@ -81,10 +81,10 @@ app.get('/item/:id', (req, res) => {
       user: getCurrentUser(req),
       item: item
     };
+    console.log(viewData);
     res.render('item', viewData);
   });
 });
-
 
 app.get('/register', (req, res) => {
   const viewData = {
