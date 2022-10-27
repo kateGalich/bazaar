@@ -72,6 +72,7 @@ const fetchMessages = function(messages) {
       FROM messages
       LEFT JOIN items ON item_id = items.id
       WHERE items.id = $1
+      ORDER BY messages.created
     `, itemInfo)
     .then((result) => {
       return Promise.resolve(result.rows);

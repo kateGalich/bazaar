@@ -76,8 +76,10 @@
           </li>
         </ul>
         <div class="chat-box-text">
-          <input class="form-control border no-shadow no-rounded" placeholder="Type your message here">
-          <button class="btn btn-success no-rounded" type="button">Send</button>
+          <form method="POST" action="/updatemsgs">
+            <input class="form-control border no-shadow no-rounded" placeholder="Type your message here">
+            <button class="btn btn-success no-rounded" type="button">Send</button>
+          </form>
         </div>
       </div>
     </div>

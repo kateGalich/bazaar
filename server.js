@@ -76,13 +76,22 @@ app.get('/', (req, res) => {
 
 
 app.get('/item/:id', (req, res) => {
-  getItem(req.params.id).then(item => {
-    const viewData = {
-      user: getCurrentUser(req),
-      item: item
-    };
-    console.log(viewData);
-    res.render('item', viewData);
+  let viewData
+  fetchMessages(req.params.id).then(result => {
+    getItem(req.params.id).then(item => {
+      viewData = {
+        messages: result,
+        user: req.session.user_id,
+        item: item
+      };
+      if (viewData.user == viewData.messages[0].seller_id) {
+        viewData.isSeller = true;
+      } else {
+        viewData.isSeller = false;
+      }
+      console.log(viewData);
+      res.render('item', viewData);
+    })
   });
 });
 
