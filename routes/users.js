@@ -65,7 +65,7 @@ router.post('/newlisting', (req, res) => {
 router.post('/deletelisting', (req, res) => {
   const ID = req.body.listingID;
   deleteListing(ID);
-  console.log(ID);
+  res.redirect('/');
 })
 
 // router.post('/login', (req, res) => {

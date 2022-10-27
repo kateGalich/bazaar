@@ -41,11 +41,9 @@ const uploadListing = function(listing) {
     VALUES ($1, $2, $3, $4, $5, $6)
     `, listingInfo)
     .then((result) => {
-      console.log(result.rows[0]);
       return Promise.resolve(result.rows[0]);
     })
     .catch((err) => {
-      console.log('error');
       console.log(err);
     })
 };
@@ -53,6 +51,18 @@ exports.uploadListing = uploadListing;
 
 const deleteListing = function(listing) {
 
+  return pool
+    .query(`
+    DELETE FROM items
+    WHERE id = $1
+    `, [listing])
+    .then((result) => {
+      console.log(result.rows);
+      return Promise.resolve(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
 }
 exports.deleteListing = deleteListing;
 

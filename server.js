@@ -55,7 +55,7 @@ app.use('/users', usersRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Show error page to user
-const renderError = function(req, res, message, statusCode = 400) {
+const renderError = function (req, res, message, statusCode = 400) {
   getCurrentUser(req)
     .then(user => {
       const viewData = {
@@ -82,15 +82,6 @@ app.get('/', (req, res) => {
             items: items,
             query: req.query
           };
-          for (let each in viewData.items) {
-            console.log(each);
-            if (viewData.items[each].seller_id == viewData.user.id) {
-              viewData.items[each].isSeller = true;
-            } else {
-              viewData.items[each].isSeller = false;
-            }
-          }
-          console.log(viewData);
           res.render('index', viewData);
         });
     });
@@ -123,6 +114,14 @@ app.get('/item/:id', (req, res) => {
             user: user,
             item: item
           };
+          if (req.session.user_id) {
+            if (viewData.item.seller_id == viewData.user.id) {
+              viewData.item.isSeller = true;
+            } else {
+              viewData.item.isSeller = false;
+            }
+          }
+          console.log(viewData);
           res.render('item', viewData);
         });
     });

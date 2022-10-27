@@ -26,62 +26,74 @@
 </head>
 
 <body>
-  <%- include('partials/_nav') %>
-    <header>
+  <header>
+    <%- include('partials/_nav') %>
 
-    </header>
+  </header>
 
-    <main>
+  <main>
 
-      <div class="album pt-5">
-        <div class="container">
-          <div class="row align-items-md-stretch">
-            <div class="col-md-6 ">
-              <div class="p-5 bg-light border rounded-3">
-                <a href="/item/<%=item.id%>">
-                  <img class="bd-placeholder-img card-img-top h-100" width="100%" height="225" src="<%=item.photo%>"
-                    aria-label="Placeholder: Thumbnail" focusable="false">
-                </a>
-                <div class="card-body h-100">
-                  <p class="card-text fs-5 fw-normal">
-                    <%=item.title %>
-                  </p>
-                  <p class="card-text">
-                    <%=item.description %>
-                  </p>
-                  <p class="fs-5 ">$<%=item.price%>
-                  </p>
-                </div>
+    <div class="album pt-5">
+      <div class="container">
+        <div class="row align-items-md-stretch">
+          <div class="col-md-6 ">
+            <div class="p-5 bg-light border rounded-3">
+              <a href="/item/<%=item.id%>">
+                <img class="bd-placeholder-img card-img-top h-100" width="100%" height="225" src="<%=item.photo%>"
+                  aria-label="Placeholder: Thumbnail" focusable="false">
+              </a>
+              <div class="card-body h-100">
+                <p class="card-text fs-5 fw-normal">
+                  <%=item.title %>
+                </p>
+                <p class="card-text">
+                  <%=item.description %>
+                </p>
+                <p class="fs-5 ">$<%=item.price%>
+                </p>
               </div>
+              <section class="seller-options">
+                <% if(item.isSeller) { %>
+                  <form method="POST" action="/users/deletelisting">
+                    <input type="hidden" name="listingID" value="<%=item.id%>" id="listingID" />
+                    <button class="w-40 btn btn-sm btn-danger" type="submit">Delete</button>
+                  </form>
+                  <form method="POST" action="/users/sold">
+                    <input type="hidden" name="listingID" value="<%=item.id%>" id="listingID" />
+                    <button class="w-40 btn btn-sm btn-warning" type="submit">Mark as Sold</button>
+                  </form>
+                  <% } %>
+              </section>
             </div>
-            <div class="col-md-6">
-              <div class="h-100 p-5 bg-light border rounded-3">
-                <%- include('partials/_chat') %>
-              </div>
+          </div>
+          <div class="col-md-6">
+            <div class="h-100 p-5 bg-light border rounded-3">
+              <%- include('partials/_chat') %>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-    </main>
+  </main>
 
-    <footer class="text-muted py-5">
-      <div class="container">
-        <p class="float-end mb-1">
-          <a href="#">Back to top</a>
-        </p>
-        <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-        <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a
-            href="/docs/5.2/getting-started/introduction/">getting started guide</a>.</p>
-      </div>
-    </footer>
+  <footer class="text-muted py-5">
+    <div class="container">
+      <p class="float-end mb-1">
+        <a href="#">Back to top</a>
+      </p>
+      <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+      <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a
+          href="/docs/5.2/getting-started/introduction/">getting started guide</a>.</p>
+    </div>
+  </footer>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-      crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
 
-    <script src="scripts/header.js"></script>
+  <script src="scripts/header.js"></script>
 
 
 </body>
