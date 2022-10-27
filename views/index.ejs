@@ -80,6 +80,9 @@
                       </p>
                       <div class="d-flex justify-content-between align-items-center">
                         <span class="fs-5 ">$<%=item.price%></span>
+                        <% if (item.sold_to) { %>
+                        <span class="fs-5" style="color: red">SOLD!</span>
+                        <% } %>
                       </div>
                     </div>
 

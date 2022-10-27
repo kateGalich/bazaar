@@ -64,9 +64,28 @@ const deleteListing = function(listing) {
     })
 }
 
+const soldTo = function(itemBuyer) {
+  const sold = [`${itemBuyer.itemID}`, `${itemBuyer.buyerEmailID}`];
+
+  return db
+    .query(`
+    UPDATE items
+    SET sold_to = $2
+    WHERE id = $1
+    `, sold)
+    .then((result) => {
+      console.log(result.rows[0]);
+      return Promise.resolve(result.rows);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}
+
 module.exports = {
   getItems: getItems,
   getItem: getItem,
   uploadListing: uploadListing,
-  deleteListing: deleteListing
+  deleteListing: deleteListing,
+  soldTo: soldTo
 };

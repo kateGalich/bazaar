@@ -5,8 +5,8 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const { uploadListing, deleteListing } = require('../db/queries/items');
-const { registerUser } = require('../db/queries/users');
+const { uploadListing, deleteListing, soldTo } = require('../db/queries/items');
+const { registerUser, getUserByEmail } = require('../db/queries/users');
 
 const express = require('express');
 const { application } = require('express');
@@ -66,6 +66,24 @@ router.post('/deletelisting', (req, res) => {
   const ID = req.body.listingID;
   deleteListing(ID);
   res.redirect('/');
+})
+
+router.post('/sold', (req, res) => {
+  getUserByEmail(req.body.buyerEmail)
+  .then((itemBuyerEmail) => {
+    if (!itemBuyerEmail) {
+      res.status(400).send('That user email does not exist');
+      return;
+    }
+    const itemBuyer = {
+      itemID: req.body.listingID,
+      buyerEmailID: itemBuyerEmail.id
+    }
+    soldTo(itemBuyer)
+    .then(() => {
+      res.redirect('/');
+    })
+  })
 })
 
 // router.post('/login', (req, res) => {
