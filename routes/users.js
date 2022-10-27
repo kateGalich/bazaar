@@ -5,17 +5,26 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const { getItems } = require('../db/queries/items');
-let getCurrentUser = function (req) {
-  //return { email: "test@email.com" }
-  return null;
-};
+const { getUser, getCurrentUser, getUserByEmail } = require('../db/queries/users');
 
 const express = require('express');
 const { application } = require('express');
 const { registerUser, loginUser, uploadListing } = require('./database');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
+
+// Show error page to user
+const renderError = function(req, res, message, statusCode = 400) {
+  getCurrentUser(req)
+    .then(user => {
+      const viewData = {
+        user: user,
+        message: message
+      };
+      res.status(statusCode);
+      res.render("error", viewData);
+    });
+};
 
 function getCurrentDate() {
   var d = new Date()
@@ -30,25 +39,6 @@ function getCurrentDate() {
   }
   return [year, month, day].join('-');
 }
-
-router.post('/register', (req, res) => {
-  const newUser = {
-    name: req.body.name,
-    password: bcrypt.hashSync(req.body.password),
-    email: req.body.email,
-    phone: req.body.phone,
-    address: req.body.address
-  };
-  registerUser(newUser);
-  res.redirect("/");
-});
-
-router.post('/login/:id', (req, res) => {
-  req.session.user_id = req.params.id;
-  console.log(req.session.user_id);
-  loginUser(req.session.user_id);
-  res.redirect('/');
-});
 
 router.post('/newlisting', (req, res) => {
   const today = new Date();
@@ -67,21 +57,57 @@ router.post('/newlisting', (req, res) => {
 })
 
 
-// router.post('/login', (req, res) => {
-//   const logUser = {
-//     email: req.body.email,
-//     password: req.body.password
-//   };
-//   loginUser(logUser)
-//   .then((user) => {
-//     console.log(user);
-//     if (!user || !bcrypt.compareSync(logUser.password, user.password)) {
-//       res.send('Email or Password is incorrect');
-//       return;
-//     }
-//     res.redirect("/");
-//   })
-//   .catch(err => console.log(err));
-// });
+router.post('/register', (req, res) => {
+  const newUser = {
+    name: req.body.name,
+    password: bcrypt.hashSync(req.body.password),
+    email: req.body.email,
+    phone: req.body.phone,
+    address: req.body.address
+  };
+  registerUser(newUser);
+  res.redirect("/");
+});
+
+router.get('/register', (req, res) => {
+  getCurrentUser(req)
+    .then(user => {
+      const viewData = {
+        user: user
+      };
+      res.render('register', viewData);
+    });
+});
+
+router.get('/login', (req, res) => {
+  getCurrentUser(req)
+    .then(user => {
+      const viewData = {
+        user: user
+      };
+      res.render('login', viewData);
+    });
+});
+
+router.post("/login", (req, res) => {
+  getUserByEmail(req.body.email)
+    .then(user => {
+
+      if (!user) {
+        renderError(req, res, 'Username and password not matched!', 401);
+        return;
+      } else if (!bcrypt.compareSync(req.body.password, user.password)) {
+        renderError(req, res, 'Username and password not matched!', 401);
+        return;
+      }
+      req.session.user_id = user.id;
+      res.redirect('/');
+    });
+});
+
+router.post('/logout', (req, res) => {
+  req.session = null;
+  res.redirect('/');
+});
 
 module.exports = router;

@@ -55,19 +55,6 @@ app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 // Note: mount other resources here, using the same pattern above
 
-// Show error page to user
-const renderError = function(req, res, message, statusCode = 400) {
-  getCurrentUser(req)
-    .then(user => {
-      const viewData = {
-        user: user,
-        message: message
-      };
-      res.status(statusCode);
-      res.render("error", viewData);
-    });
-};
-
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
@@ -120,48 +107,6 @@ app.get('/item/:id', (req, res) => {
     });
 });
 
-app.get('/register', (req, res) => {
-  getCurrentUser(req)
-    .then(user => {
-      const viewData = {
-        user: user
-      };
-      res.render('register', viewData);
-    });
-});
-
-app.get('/login', (req, res) => {
-  getCurrentUser(req)
-    .then(user => {
-      const viewData = {
-        user: user
-      };
-      res.render('login', viewData);
-    });
-});
-
-app.post("/login", (req, res) => {
-  getUserByEmail(req.body.email)
-    .then(user => {
-
-      if (!user) {
-        renderError(req, res, 'Username and password not matched!', 401);
-        return;
-      } else if (!bcrypt.compareSync(req.body.password, user.password)) {
-        renderError(req, res, 'Username and password not matched!', 401);
-        return;
-      }
-      req.session.user_id = user.id;
-      res.redirect('/');
-    });
-});
-
-app.post('/logout', (req, res) => {
-  req.session = null;
-  res.redirect('/');
-});
-
-
 app.get('/messages', (req, res) => {
   const viewData = {
     user: getCurrentUser(req),
@@ -176,10 +121,6 @@ app.get('/newlisting', (req, res) => {
   };
   res.render('postlisting', viewData);
 });
-
-// get list of user's items ...
-// delete item
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
