@@ -26,36 +26,6 @@ const renderError = function(req, res, message, statusCode = 400) {
     });
 };
 
-function getCurrentDate() {
-  var d = new Date()
-  month = '' + (d.getMonth() + 1)
-  day = '' + d.getDate()
-  year = d.getFullYear();
-  if (month.length < 2) {
-    month = '0' + month;
-  }
-  if (day.length < 2) {
-    day = '0' + day;
-  }
-  return [year, month, day].join('-');
-}
-
-router.post('/newlisting', (req, res) => {
-  const today = new Date();
-  console.log(today);
-  const itemData = {
-    seller_id: req.session.user_id,
-    title: req.body.title,
-    price: req.body.price,
-    description: req.body.description,
-    photo: req.body.photo,
-    date: getCurrentDate()
-  }
-
-  uploadListing(itemData);
-  res.redirect('/');
-})
-
 
 router.post('/register', (req, res) => {
   const newUser = {

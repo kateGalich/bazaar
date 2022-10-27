@@ -42,8 +42,8 @@ app.use(cookieSession({
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
-const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users.js');
+const itemsRoutes = require('./routes/items.js');
 const { loginUser, fetchMessages } = require('./routes/database');
 const { user } = require('pg/lib/defaults');
 
@@ -51,60 +51,16 @@ const { user } = require('pg/lib/defaults');
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', userApiRoutes);
-app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
+app.use('/items', itemsRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-// get home page
 app.get('/', (req, res) => {
-  getCurrentUser(req)
-    .then(user => {
-      getItems(req.query)
-        .then(items => {
-          const viewData = {
-            user: user,
-            items: items,
-            query: req.query
-          };
-          res.render('index', viewData);
-        });
-    });
-});
-
-//view one item
-app.get('/item/:id', (req, res) => {
-  // let viewData
-  // fetchMessages(req.params.id).then(result => {
-  //   getItem(req.params.id).then(item => {
-  //     viewData = {
-  //       messages: result,
-  //       user: req.session.user_id,
-  //       item: item
-  //     };
-  //     if (viewData.user == viewData.messages[0].seller_id) {
-  //       viewData.isSeller = true;
-  //     } else {
-  //       viewData.isSeller = false;
-  //     }
-  //     console.log(viewData);
-  //     res.render('item', viewData);
-  //   })
-  // });
-  getCurrentUser(req)
-    .then(user => {
-      getItem(req.params.id)
-        .then(item => {
-          const viewData = {
-            user: user,
-            item: item
-          };
-          res.render('item', viewData);
-        });
-    });
+  res.redirect('/items')
 });
 
 app.get('/messages', (req, res) => {
@@ -112,14 +68,6 @@ app.get('/messages', (req, res) => {
     user: getCurrentUser(req),
   };
   res.render('messenger', viewData);
-});
-
-// get create new page
-app.get('/newlisting', (req, res) => {
-  const viewData = {
-    user: getCurrentUser(req),
-  };
-  res.render('postlisting', viewData);
 });
 
 app.listen(PORT, () => {
