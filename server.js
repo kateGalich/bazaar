@@ -42,18 +42,23 @@ app.use(cookieSession({
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
-const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users.js');
+<<<<<<< HEAD
+=======
+const itemsRoutes = require('./routes/items.js');
+const { loginUser, fetchMessages } = require('./routes/database');
+>>>>>>> master
 const { user } = require('pg/lib/defaults');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', userApiRoutes);
-app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
+app.use('/items', itemsRoutes);
 // Note: mount other resources here, using the same pattern above
 
+<<<<<<< HEAD
 // Show error page to user
 const renderError = function (req, res, message, statusCode = 400) {
   getCurrentUser(req)
@@ -67,12 +72,14 @@ const renderError = function (req, res, message, statusCode = 400) {
     });
 };
 
+=======
+>>>>>>> master
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-// get home page
 app.get('/', (req, res) => {
+<<<<<<< HEAD
   getCurrentUser(req)
     .then(user => {
       getItems(req.query)
@@ -161,13 +168,10 @@ app.post("/login", (req, res) => {
       req.session.user_id = user.id;
       res.redirect('/');
     });
+=======
+  res.redirect('/items')
+>>>>>>> master
 });
-
-app.post('/logout', (req, res) => {
-  req.session = null;
-  res.redirect('/');
-});
-
 
 app.get('/messages', (req, res) => {
   const viewData = {
@@ -175,18 +179,6 @@ app.get('/messages', (req, res) => {
   };
   res.render('messenger', viewData);
 });
-
-// get create new page
-app.get('/newlisting', (req, res) => {
-  const viewData = {
-    user: getCurrentUser(req),
-  };
-  res.render('postlisting', viewData);
-});
-
-// get list of user's items ...
-// delete item
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

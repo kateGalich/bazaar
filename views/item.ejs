@@ -28,7 +28,6 @@
 <body>
   <header>
     <%- include('partials/_nav') %>
-
   </header>
 
   <main>
@@ -38,10 +37,8 @@
         <div class="row align-items-md-stretch">
           <div class="col-md-6 ">
             <div class="p-5 bg-light border rounded-3">
-              <a href="/item/<%=item.id%>">
-                <img class="bd-placeholder-img card-img-top h-100" width="100%" height="225" src="<%=item.photo%>"
-                  aria-label="Placeholder: Thumbnail" focusable="false">
-              </a>
+              <img class="bd-placeholder-img card-img-top h-100" width="100%" height="225" src="<%=item.photo%>"
+                aria-label="Placeholder: Thumbnail" focusable="false">
               <div class="card-body h-100">
                 <p class="card-text fs-5 fw-normal">
                   <%=item.title %>
@@ -52,17 +49,19 @@
                 <p class="fs-5 ">$<%=item.price%>
                 </p>
               </div>
-              <section class="seller-options">
-                <% if(item.isSeller) { %>
-                  <form method="POST" action="/users/deletelisting">
-                    <input type="hidden" name="listingID" value="<%=item.id%>" id="listingID" />
-                    <button class="w-40 btn btn-sm btn-danger" type="submit">Delete</button>
-                  </form>
-                  <form method="POST" action="/users/sold">
-                    <% if (!item.sold_to) { %>
+            </div>
+            <section class="seller-options">
+              <% if(item.isSeller) { %>
+                <form method="POST" action="/users/deletelisting">
+                  <input type="hidden" name="listingID" value="<%=item.id%>" id="listingID" />
+                  <button class="w-40 btn btn-sm btn-danger" type="submit">Delete</button>
+                </form>
+                <form method="POST" action="/users/sold">
+                  <% if (!item.sold_to) { %>
                     <form class="needs-validation" novalidate>
                       <div class="input-group has-validation">
-                        <input type="email" name="buyerEmail" id="buyerEmail" Placeholder="Enter buyer's email" required>
+                        <input type="email" name="buyerEmail" id="buyerEmail" Placeholder="Enter buyer's email"
+                          required>
                         <div class="invalid-feedback">
                           Buyer's email is required.
                         </div>
@@ -75,18 +74,18 @@
                       <p class="fs-5 " style="color: red">SOLD!
                       </p>
                     <% } %>
-                  </form>
-                  <% } %>
-              </section>
-            </div>
+                </form>
+                <% } %>
+            </section>
           </div>
-          <div class="col-md-6">
-            <div class="h-100 p-5 bg-light border rounded-3">
-              <%- include('partials/_chat') %>
-            </div>
+        </div>
+        <div class="col-md-6">
+          <div class="h-100 p-5 bg-light border rounded-3">
+            <%- include('partials/_chat') %>
           </div>
         </div>
       </div>
+    </div>
     </div>
 
   </main>
