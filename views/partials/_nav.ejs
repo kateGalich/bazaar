@@ -2,8 +2,8 @@
   <div class="container-fluid">
 
     <a href="/items/" class="navbar-brand d-flex align-items-center">
-      <i class="fa-solid fa-store"></i>
-      <strong>Bazaar</strong>
+      <i class="fa-solid fa-store fs-1"></i>
+      <p  class="fs-3 mb-sm-1 ms-sm-3">Bazaar</p>
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -12,11 +12,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li class="nav-item fs-5">
           <a class="nav-link active" aria-current="page" href="/items/">Home</a>
         </li>
         <% if(user) {%>
-        <li class="nav-item">
+        <li class="nav-item fs-5 ms-sm-4">
           <a class="nav-link active" aria-current="page" href="/items/newlisting">Post new listing</a>
         </li>
         <% } %>
@@ -28,19 +28,19 @@
 
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
         <% if(!user) {%>
-          <li class="nav-item">
+          <li class="nav-item fs-5">
             <a class="nav-link" href="/users/login">Sign in</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item fs-5">
             <a class="nav-link" href="/users/register">Sign up</a>
           </li>
           <% } else { %>
             <li class="nav-item">
               <form method="POST" action="/users/logout">
-                <span class="text-muted">
+                <span class="text-muted fs-5 me-4">
                   Logged in as: <%= user.email %>
                 </span>
-                <button type="submit" class="nav-item btn btn-primary">Logout</button>
+                <button type="submit" class="nav-item btn btn-primary fs-5">Logout</button>
               </form>
             </li>
             <% } %>
