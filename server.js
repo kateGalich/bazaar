@@ -58,6 +58,10 @@ app.use('/items', itemsRoutes);
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+app.get('/', (req, res) => {
+  res.redirect('/items');
+});
+
 app.get('/messages', (req, res) => {
   const viewData = {
     user: getCurrentUser(req),
