@@ -80,6 +80,12 @@
                       </p>
                       <div class="d-flex justify-content-between align-items-center">
                         <span class="fs-5 ">$<%=item.price%></span>
+                        <% if(item.isSeller) { %>
+                          <form method="POST" action="/users/deletelisting">
+                            <input type="hidden" name="listingID" value="<%=item.id%>" id="listingID"/>
+                            <button class="w-100 btn btn-sm btn-danger" type="submit">Delete</button>
+                          </form>
+                        <% } %>
                       </div>
                     </div>
 

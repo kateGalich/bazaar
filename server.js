@@ -44,7 +44,6 @@ app.use(cookieSession({
 const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users.js');
-const { loginUser, fetchMessages } = require('./routes/database');
 const { user } = require('pg/lib/defaults');
 
 // Mount all resource routes
@@ -83,6 +82,15 @@ app.get('/', (req, res) => {
             items: items,
             query: req.query
           };
+          for (let each in viewData.items) {
+            console.log(each);
+            if (viewData.items[each].seller_id == viewData.user.id) {
+              viewData.items[each].isSeller = true;
+            } else {
+              viewData.items[each].isSeller = false;
+            }
+          }
+          console.log(viewData);
           res.render('index', viewData);
         });
     });

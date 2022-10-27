@@ -14,6 +14,9 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <% if(user) {%>
+          <a class="nav-link active" aria-current="page" href="/newlisting">Post new listing</a>
+          <% } %>
         </li>
       </ul>
       <!-- <form class="d-flex" role="search">
@@ -36,10 +39,8 @@
               Logged in as: <%= user.email %>
             </span>
             <button type="submit" class="nav-item btn btn-primary">Logout</button>
-          </form>
         </li>
         <% } %>
-
       </ul>
 
     </div>

@@ -30,4 +30,58 @@ const getUserByEmail = function(email) {
       return result.rows[0];
     });
 };
-module.exports = { getUsers, getUser, getCurrentUser, getUserByEmail };
+
+const registerUser = function(user) {
+  const userInfo = [`${user.name}`, `${user.password}`, `${user.email}`, `${user.phone}`, `${user.address}`];
+
+  return pool
+    .query(`
+    INSERT INTO users (name, password, email, phone, address)
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *;
+    `, userInfo)
+    .then((result) => {
+      console.log(result.rows[0]);
+      return Promise.resolve(result.rows[0])
+    })
+    .catch ((err) => {
+      console.log(err);
+    })
+};
+
+// const loginUser = function(user) {
+//   const userInfo = [`${user}`];
+
+//   return pool
+//     .query(`
+//     SELECT * FROM users
+//     WHERE id = $1
+//     `, userInfo)
+//     .then((result) => {
+//       console.log(result.rows[0]);
+//       return Promise.resolve(result.rows[0]);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     })
+// };
+
+// const loginUser = function(user) {
+//   const userInfo = [`${user}`];
+
+//   return pool
+//     .query(`
+//     SELECT * FROM users
+//     WHERE id = $1
+//     `, userInfo)
+//     .then((result) => {
+//       console.log(result.rows[0]);
+//       return Promise.resolve(result.rows[0]);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     })
+// };
+// exports.loginUser = loginUser;
+
+module.exports = { getUsers, getUser, getCurrentUser, getUserByEmail, registerUser };
