@@ -3,7 +3,7 @@ const db = require('../connection');
 const fetchMessages = function(messages) {
   const itemInfo = [`${messages}`];
 
-  return pool
+  return db
     .query(`
       SELECT *
       FROM messages

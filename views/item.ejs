@@ -59,7 +59,7 @@
                     <button class="w-40 btn btn-sm btn-danger" type="submit">Delete</button>
                   </form>
                   <form method="POST" action="/users/sold">
-                    <input type="hidden" name="listingID" value="<%=item.id%>" id="listingID" />
+                    <input type="text" name="sellerEmail" id="sellerEmail" Placeholder="Enter buyer's email"></input>
                     <button class="w-40 btn btn-sm btn-warning" type="submit">Mark as Sold</button>
                   </form>
                   <% } %>
