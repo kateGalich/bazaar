@@ -5,12 +5,11 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const { getUser, getCurrentUser } = require('../db/queries/users');
-const { getItems, getItem } = require('../db/queries/items');
+const { getUser, getCurrentUser, getUserByEmail } = require('../db/queries/users');
+const { getItems, getItem, uploadListing, deleteListing, soldTo } = require('../db/queries/items');
 
 const express = require('express');
 const { application } = require('express');
-const { registerUser, loginUser, uploadListing } = require('./database');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
 
@@ -32,23 +31,6 @@ router.get('/', (req, res) => {
 
 //view one item
 router.get('/view/:id', (req, res) => {
-  // let viewData
-  // fetchMessages(req.params.id).then(result => {
-  //   getItem(req.params.id).then(item => {
-  //     viewData = {
-  //       messages: result,
-  //       user: req.session.user_id,
-  //       item: item
-  //     };
-  //     if (viewData.user == viewData.messages[0].seller_id) {
-  //       viewData.isSeller = true;
-  //     } else {
-  //       viewData.isSeller = false;
-  //     }
-  //     console.log(viewData);
-  //     res.render('item', viewData);
-  //   })
-  // });
   getCurrentUser(req)
     .then(user => {
       getItem(req.params.id)
@@ -57,6 +39,14 @@ router.get('/view/:id', (req, res) => {
             user: user,
             item: item
           };
+          if (req.session.user_id) {
+            if (viewData.item.seller_id == viewData.user.id) {
+              viewData.item.isSeller = true;
+            } else {
+              viewData.item.isSeller = false;
+            }
+          }
+          console.log(viewData);
           res.render('item', viewData);
         });
     });
@@ -102,8 +92,31 @@ router.post('/newlisting', (req, res) => {
   };
 
   uploadListing(itemData);
-  res.redirect('/');
+  res.redirect('/items');
 });
 
+router.post('/deletelisting', (req, res) => {
+  const ID = req.body.listingID;
+  deleteListing(ID);
+  res.redirect('/items');
+})
+
+router.post('/sold', (req, res) => {
+  getUserByEmail(req.body.buyerEmail)
+  .then((itemBuyerEmail) => {
+    if (!itemBuyerEmail) {
+      res.status(400).send('That user email does not exist');
+      return;
+    }
+    const itemBuyer = {
+      itemID: req.body.listingID,
+      buyerEmailID: itemBuyerEmail.id
+    }
+    soldTo(itemBuyer)
+    .then(() => {
+      res.redirect('/items');
+    })
+  })
+})
 
 module.exports = router;

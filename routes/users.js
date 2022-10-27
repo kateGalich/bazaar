@@ -5,12 +5,8 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-<<<<<<< HEAD
 const { uploadListing, deleteListing, soldTo } = require('../db/queries/items');
-const { registerUser, getUserByEmail } = require('../db/queries/users');
-=======
-const { getUser, getCurrentUser, getUserByEmail } = require('../db/queries/users');
->>>>>>> master
+const { registerUser, getUserByEmail, getUser, getCurrentUser } = require('../db/queries/users');
 
 const express = require('express');
 const { application } = require('express');
@@ -30,7 +26,6 @@ const renderError = function(req, res, message, statusCode = 400) {
     });
 };
 
-
 router.post('/register', (req, res) => {
   const newUser = {
     name: req.body.name,
@@ -40,7 +35,7 @@ router.post('/register', (req, res) => {
     address: req.body.address
   };
   registerUser(newUser);
-  res.redirect("/");
+  res.redirect("/items");
 });
 
 router.get('/register', (req, res) => {
@@ -63,35 +58,6 @@ router.get('/login', (req, res) => {
     });
 });
 
-<<<<<<< HEAD
-  uploadListing(itemData);
-  res.redirect('/');
-});
-
-router.post('/deletelisting', (req, res) => {
-  const ID = req.body.listingID;
-  deleteListing(ID);
-  res.redirect('/');
-})
-
-router.post('/sold', (req, res) => {
-  getUserByEmail(req.body.buyerEmail)
-  .then((itemBuyerEmail) => {
-    if (!itemBuyerEmail) {
-      res.status(400).send('That user email does not exist');
-      return;
-    }
-    const itemBuyer = {
-      itemID: req.body.listingID,
-      buyerEmailID: itemBuyerEmail.id
-    }
-    soldTo(itemBuyer)
-    .then(() => {
-      res.redirect('/');
-    })
-  })
-})
-=======
 router.post("/login", (req, res) => {
   getUserByEmail(req.body.email)
     .then(user => {
@@ -104,14 +70,13 @@ router.post("/login", (req, res) => {
         return;
       }
       req.session.user_id = user.id;
-      res.redirect('/');
+      res.redirect('/items');
     });
 });
->>>>>>> master
 
 router.post('/logout', (req, res) => {
   req.session = null;
-  res.redirect('/');
+  res.redirect('/items');
 });
 
 module.exports = router;

@@ -43,11 +43,7 @@ app.use(cookieSession({
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
 const usersRoutes = require('./routes/users.js');
-<<<<<<< HEAD
-=======
 const itemsRoutes = require('./routes/items.js');
-const { loginUser, fetchMessages } = require('./routes/database');
->>>>>>> master
 const { user } = require('pg/lib/defaults');
 
 // Mount all resource routes
@@ -58,120 +54,9 @@ app.use('/users', usersRoutes);
 app.use('/items', itemsRoutes);
 // Note: mount other resources here, using the same pattern above
 
-<<<<<<< HEAD
-// Show error page to user
-const renderError = function (req, res, message, statusCode = 400) {
-  getCurrentUser(req)
-    .then(user => {
-      const viewData = {
-        user: user,
-        message: message
-      };
-      res.status(statusCode);
-      res.render("error", viewData);
-    });
-};
-
-=======
->>>>>>> master
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-
-app.get('/', (req, res) => {
-<<<<<<< HEAD
-  getCurrentUser(req)
-    .then(user => {
-      getItems(req.query)
-        .then(items => {
-          const viewData = {
-            user: user,
-            items: items,
-            query: req.query
-          };
-          res.render('index', viewData);
-        });
-    });
-});
-
-//view one item
-app.get('/item/:id', (req, res) => {
-  // let viewData
-  // fetchMessages(req.params.id).then(result => {
-  //   getItem(req.params.id).then(item => {
-  //     viewData = {
-  //       messages: result,
-  //       user: req.session.user_id,
-  //       item: item
-  //     };
-  //     if (viewData.user == viewData.messages[0].seller_id) {
-  //       viewData.isSeller = true;
-  //     } else {
-  //       viewData.isSeller = false;
-  //     }
-  //     console.log(viewData);
-  //     res.render('item', viewData);
-  //   })
-  // });
-  getCurrentUser(req)
-    .then(user => {
-      getItem(req.params.id)
-        .then(item => {
-          const viewData = {
-            user: user,
-            item: item
-          };
-          if (req.session.user_id) {
-            if (viewData.item.seller_id == viewData.user.id) {
-              viewData.item.isSeller = true;
-            } else {
-              viewData.item.isSeller = false;
-            }
-          }
-          console.log(viewData);
-          res.render('item', viewData);
-        });
-    });
-});
-
-app.get('/register', (req, res) => {
-  getCurrentUser(req)
-    .then(user => {
-      const viewData = {
-        user: user
-      };
-      res.render('register', viewData);
-    });
-});
-
-app.get('/login', (req, res) => {
-  getCurrentUser(req)
-    .then(user => {
-      const viewData = {
-        user: user
-      };
-      res.render('login', viewData);
-    });
-});
-
-app.post("/login", (req, res) => {
-  getUserByEmail(req.body.email)
-    .then(user => {
-
-      if (!user) {
-        renderError(req, res, 'Username and password not matched!', 401);
-        return;
-      } else if (!bcrypt.compareSync(req.body.password, user.password)) {
-        renderError(req, res, 'Username and password not matched!', 401);
-        return;
-      }
-      req.session.user_id = user.id;
-      res.redirect('/');
-    });
-=======
-  res.redirect('/items')
->>>>>>> master
-});
 
 app.get('/messages', (req, res) => {
   const viewData = {

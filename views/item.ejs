@@ -49,39 +49,39 @@
                 <p class="fs-5 ">$<%=item.price%>
                 </p>
               </div>
-            </div>
-            <section class="seller-options">
-              <% if(item.isSeller) { %>
-                <form method="POST" action="/users/deletelisting">
-                  <input type="hidden" name="listingID" value="<%=item.id%>" id="listingID" />
-                  <button class="w-40 btn btn-sm btn-danger" type="submit">Delete</button>
-                </form>
-                <form method="POST" action="/users/sold">
-                  <% if (!item.sold_to) { %>
-                    <form class="needs-validation" novalidate>
-                      <div class="input-group has-validation">
-                        <input type="email" name="buyerEmail" id="buyerEmail" Placeholder="Enter buyer's email"
-                          required>
-                        <div class="invalid-feedback">
-                          Buyer's email is required.
+              <section class="seller-options">
+                <% if(item.isSeller) { %>
+                  <form method="POST" action="/items/deletelisting">
+                    <input type="hidden" name="listingID" value="<%=item.id%>" id="listingID" />
+                    <button class="w-40 btn btn-sm btn-danger" type="submit">Delete</button>
+                  </form>
+                  <form method="POST" action="/items/sold">
+                    <% if (!item.sold_to) { %>
+                      <form class="needs-validation" novalidate>
+                        <div class="input-group has-validation">
+                          <input type="email" name="buyerEmail" id="buyerEmail" Placeholder="Enter buyer's email"
+                            required>
+                          <div class="invalid-feedback">
+                            Buyer's email is required.
+                          </div>
+                          <input type="hidden" name="listingID" value="<%=item.id%>" id="listingID" />
+                          <button class="soldButton w-40 btn btn-sm btn-warning" type="submit">Mark as Sold</button>
                         </div>
-                        <input type="hidden" name="listingID" value="<%=item.id%>" id="listingID" />
-                        <button class="soldButton w-40 btn btn-sm btn-warning" type="submit">Mark as Sold</button>
-                      </div>
-                    </form>
-                    <% } %>
-                    <% if (item.sold_to) { %>
-                      <p class="fs-5 " style="color: red">SOLD!
-                      </p>
-                    <% } %>
-                </form>
-                <% } %>
-            </section>
+                      </form>
+                      <% } %>
+                      <% if (item.sold_to) { %>
+                        <p class="fs-5 " style="color: red">SOLD!
+                        </p>
+                      <% } %>
+                  </form>
+                  <% } %>
+              </section>
+            </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="h-100 p-5 bg-light border rounded-3">
-            <%- include('partials/_chat') %>
+          <div class="col-md-6">
+            <div class="h-100 p-5 bg-light border rounded-3">
+              <%- include('partials/_chat') %>
+            </div>
           </div>
         </div>
       </div>
