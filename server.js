@@ -8,6 +8,7 @@ const morgan = require('morgan');
 
 // temporarily importing here
 const { getItems, getItem } = require('./db/queries/items');
+const { getUser, getCurrentUser, getUserByEmail } = require('./db/queries/users');
 
 const cookieSession = require('cookie-session');
 const bcrypt = require('bcryptjs');
@@ -54,60 +55,112 @@ app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 // Note: mount other resources here, using the same pattern above
 
+// Show error page to user
+const renderError = function(req, res, message, statusCode = 400) {
+  getCurrentUser(req)
+    .then(user => {
+      const viewData = {
+        user: user,
+        message: message
+      };
+      res.status(statusCode);
+      res.render("error", viewData);
+    });
+};
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-let getCurrentUser = function (req) {
-  //return { email: "test@email.com" }
-  return null;
-};
-
+// get home page
 app.get('/', (req, res) => {
-  getItems(req.query).then(items => {
-    const viewData = {
-      user: getCurrentUser(req),
-      items: items,
-      query: req.query
-    };
-    res.render('index', viewData);
-  });
+  getCurrentUser(req)
+    .then(user => {
+      getItems(req.query)
+        .then(items => {
+          const viewData = {
+            user: user,
+            items: items,
+            query: req.query
+          };
+          res.render('index', viewData);
+        });
+    });
 });
 
-
+//view one item
 app.get('/item/:id', (req, res) => {
-  let viewData
-  fetchMessages(req.params.id).then(result => {
-    getItem(req.params.id).then(item => {
-      viewData = {
-        messages: result,
-        user: req.session.user_id,
-        item: item
-      };
-      if (viewData.user == viewData.messages[0].seller_id) {
-        viewData.isSeller = true;
-      } else {
-        viewData.isSeller = false;
-      }
-      console.log(viewData);
-      res.render('item', viewData);
-    })
-  });
+  // let viewData
+  // fetchMessages(req.params.id).then(result => {
+  //   getItem(req.params.id).then(item => {
+  //     viewData = {
+  //       messages: result,
+  //       user: req.session.user_id,
+  //       item: item
+  //     };
+  //     if (viewData.user == viewData.messages[0].seller_id) {
+  //       viewData.isSeller = true;
+  //     } else {
+  //       viewData.isSeller = false;
+  //     }
+  //     console.log(viewData);
+  //     res.render('item', viewData);
+  //   })
+  // });
+  getCurrentUser(req)
+    .then(user => {
+      getItem(req.params.id)
+        .then(item => {
+          const viewData = {
+            user: user,
+            item: item
+          };
+          res.render('item', viewData);
+        });
+    });
 });
 
 app.get('/register', (req, res) => {
-  const viewData = {
-    user: getCurrentUser(req),
-  };
-  res.render('register', viewData);
+  getCurrentUser(req)
+    .then(user => {
+      const viewData = {
+        user: user
+      };
+      res.render('register', viewData);
+    });
 });
 
 app.get('/login', (req, res) => {
-  const viewData = {
-    user: getCurrentUser(req),
-  };
-  res.render('login', viewData);
-})
+  getCurrentUser(req)
+    .then(user => {
+      const viewData = {
+        user: user
+      };
+      res.render('login', viewData);
+    });
+});
+
+app.post("/login", (req, res) => {
+  getUserByEmail(req.body.email)
+    .then(user => {
+
+      if (!user) {
+        renderError(req, res, 'Username and password not matched!', 401);
+        return;
+      } else if (!bcrypt.compareSync(req.body.password, user.password)) {
+        renderError(req, res, 'Username and password not matched!', 401);
+        return;
+      }
+      req.session.user_id = user.id;
+      res.redirect('/');
+    });
+});
+
+app.post('/logout', (req, res) => {
+  req.session = null;
+  res.redirect('/');
+});
+
 
 app.get('/messages', (req, res) => {
   const viewData = {
@@ -116,12 +169,17 @@ app.get('/messages', (req, res) => {
   res.render('messenger', viewData);
 });
 
+// get create new page
 app.get('/newlisting', (req, res) => {
   const viewData = {
     user: getCurrentUser(req),
   };
   res.render('postlisting', viewData);
 });
+
+// get list of user's items ...
+// delete item
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
