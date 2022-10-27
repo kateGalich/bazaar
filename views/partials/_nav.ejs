@@ -14,10 +14,12 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/items/">Home</a>
-          <% if(user) {%>
-          <a class="nav-link active" aria-current="page" href="/items/newlisting">Post new listing</a>
-          <% } %>
         </li>
+        <% if(user) {%>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/items/newlisting">Post new listing</a>
+        </li>
+        <% } %>
       </ul>
       <!-- <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -26,22 +28,22 @@
 
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
         <% if(!user) {%>
-        <li class="nav-item">
-          <a class="nav-link" href="/users/login">Sign in</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/users/register">Sign up</a>
-        </li>
-        <% } else { %>
-        <li class="nav-item">
-          <form method="POST" action="/users/logout">
-            <span class="text-muted">
-              Logged in as: <%= user.email %>
-            </span>
-            <button type="submit" class="nav-item btn btn-primary">Logout</button>
-          </form>
-        </li>
-        <% } %>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/login">Sign in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/register">Sign up</a>
+          </li>
+          <% } else { %>
+            <li class="nav-item">
+              <form method="POST" action="/users/logout">
+                <span class="text-muted">
+                  Logged in as: <%= user.email %>
+                </span>
+                <button type="submit" class="nav-item btn btn-primary">Logout</button>
+              </form>
+            </li>
+            <% } %>
       </ul>
 
     </div>
